@@ -1,0 +1,24 @@
+{
+  "name": "lab-sequelize",
+  "version": "1.0.0",
+  "description": "Lab experiments with Sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazuke/lab-sequelize.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nazuke/lab-sequelize/issues"
+  },
+  "homepage": "https://github.com/nazuke/lab-sequelize#readme",
+  "dependencies": {
+    "sequelize": "^4.41.1",
+    "sqlite3": "^4.0.4"
+  }
+}
