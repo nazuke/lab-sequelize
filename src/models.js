@@ -12,26 +12,6 @@ const conn = new Sequelize(
 );
 /** CEASE: Initialize Sequelize Database **************************************/
 
-/** BEGIN: Project Model ******************************************************/
-const Project = conn.define(
-  'projects',
-  {
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true
-    },
-    url: {
-      type: Sequelize.STRING,
-      allowNull: false
-    }
-  },
-  {
-    indexes: []
-  }
-);
-/** CEASE: Project Model ******************************************************/
-
 /** BEGIN: Engine Model *******************************************************/
 const Engine = conn.define(
   'engines',
@@ -56,6 +36,26 @@ const Engine = conn.define(
   }
 );
 /** CEASE: Engine Model *******************************************************/
+
+/** BEGIN: Project Model ******************************************************/
+const Project = conn.define(
+  'projects',
+  {
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: true
+    },
+    url: {
+      type: Sequelize.STRING,
+      allowNull: false
+    }
+  },
+  {
+    indexes: []
+  }
+);
+/** CEASE: Project Model ******************************************************/
 
 /** BEGIN: Keyword Model ******************************************************/
 const Keyword = conn.define(
@@ -100,6 +100,14 @@ const Ranking = conn.define(
         key: 'id'
       }
     },
+    keyword_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: Keyword,
+        key: 'id'
+      }
+    },
     rank: {
       type: Sequelize.INTEGER,
       allowNull: false
@@ -115,4 +123,4 @@ const Ranking = conn.define(
 );
 /** CEASE: Ranking Model ******************************************************/
 
-conn.sync();
+conn.sync( { force: true } );
