@@ -57,6 +57,68 @@ const Project = conn.define(
 );
 /** CEASE: Project Model ******************************************************/
 
+/** BEGIN: Competitor Model ***************************************************/
+const Competitor = conn.define(
+  'competitors',
+  {
+    project_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: Project,
+        key: 'id'
+      }
+    },
+    url: {
+      type: Sequelize.STRING,
+      allowNull: false
+    }
+  },
+  {
+    indexes: []
+  }
+);
+/** CEASE: Competitor Model ***************************************************/
+
+/** BEGIN: Competitor Keyword Model *******************************************/
+const CompetitorKeyword = conn.define(
+  'competitor_keywords',
+  {
+    project_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: Project,
+        key: 'id'
+      }
+    },
+    competitor_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: Competitor,
+        key: 'id'
+      }
+    },
+    keyword: {
+      type: Sequelize.STRING,
+      allowNull: false
+    }
+  },
+  {
+    indexes: [
+      {
+        unique: true,
+        fields: [ 'competitor_id', 'keyword' ]
+      },
+      {
+        fields: [ 'keyword' ]
+      }
+    ]
+  }
+);
+/** CEASE: Competitor Keyword Model *******************************************/
+
 /** BEGIN: Keyword Model ******************************************************/
 const Keyword = conn.define(
   'keywords',
@@ -75,7 +137,15 @@ const Keyword = conn.define(
     }
   },
   {
-    indexes: []
+    indexes: [
+      {
+        unique: true,
+        fields: [ 'project_id', 'keyword' ]
+      },
+      {
+        fields: [ 'keyword' ]
+      }
+    ]
   }
 );
 /** CEASE: Keyword Model ******************************************************/
